@@ -1,0 +1,197 @@
+/* Importación de la fuente Source Code Pro de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
+
+/* Variables CSS personalizadas para mantener consistencia en el diseño */
+:root {
+    --color-terminal: #fff7ef;  /* Color de fondo para secciones */
+    --color-primary: #fff7ef;   /* Color principal del sitio */
+    --color-text: #bf8a8a;      /* Color del texto */
+    --color-hover: #8c6961;     /* Color para efectos hover */
+    --color-navbar: #bf8a8a;
+    --border-radius: 4px;       /* Radio de borde para elementos */
+    --transition-speed: 0.3s;   /* Velocidad de transiciones */
+}
+
+/* Reset y configuración base para todos los elementos */
+* {
+    font-family: 'Source Code Pro', monospace;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos base del cuerpo del documento */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+/* Contenedor principal */
+main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Estilos para todas las secciones */
+section {
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Contenedor para el contenido de cada sección */
+.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 2rem;
+}
+
+/* Estilos específicos para la sección de inicio */
+.slider-0 {
+    background-color: transparent;
+    text-align: center;
+}
+
+/* Estilos para las secciones con fondo oscuro */
+.slider-1, .slider-2, .slider-3, .slider-4 {
+    background-color: var(--color-terminal);
+}
+
+/* Estilos para títulos */
+h1, h2 {
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* Estilos para párrafos */
+p {
+    margin-bottom: 1rem;
+}
+
+/* Estilos para enlaces */
+a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+/* Efecto hover para enlaces */
+a:hover {
+    color: var(--color-hover);
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: var(--color-navbar);
+    padding: 1rem;
+}
+
+/* Estilos para la marca y enlaces de navegación */
+.navbar-brand,
+.nav-link,
+.navbar-toggler-icon {
+    color: #fff7ef !important;
+}
+
+/* Estilos específicos para el ícono del botón de navegación móvil */
+.navbar-toggler {
+    border-color: var(--color-text);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Efecto hover para enlaces de navegación */
+.nav-link:hover {
+    color: var(--color-hover) !important;
+}
+
+/* Estilos para las tarjetas de productos */
+.card {
+    background-color: var(--color-terminal);
+    border: none;
+    transition: transform var(--transition-speed) ease;
+}
+
+/* Efecto hover para las tarjetas */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilos para imágenes dentro de las tarjetas */
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+}
+
+/* Estilos para el texto de las tarjetas */
+.card-text {
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* Contenedor para el embed de TikTok */
+.tiktok-embed-container {
+    margin: 2rem 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+/* Media queries para diseño responsivo */
+@media (max-width: 768px) {
+    section {
+        padding: 1rem;
+    }
+    
+    .container {
+        padding: 0 0.5rem;
+    }
+}
+
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px; /* Distancia desde el borde inferior */
+    right: 20px; /* Distancia desde el borde derecho */
+    z-index: 9999; /* Asegura que el ícono esté encima de otros elementos */
+    border-radius: 50%; /* Opcional, para darle un borde redondeado */
+    background-color: #25d366; /* El color verde característico de WhatsApp */
+    padding: 10px; /* Espaciado alrededor del ícono */
+  }
+  
+.whatsapp-icon img {
+max-width: 100%;
+height: auto;
+}
+
+/* Estilos para botones */
+.btn-primary {
+    background-color: var(--color-navbar);
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--color-navbar);
+    --bs-btn-border-color: var(--color-navbar);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--color-navbar);
+    --bs-btn-hover-border-color: var(--color-navbar);
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--color-navbar);
+    --bs-btn-active-border-color: var(--color-navbar);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--color-navbar);
+    --bs-btn-disabled-border-color: var(--color-navbar);
+}
+
+

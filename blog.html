@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog personal de Matías Daza - Artículos sobre tecnología, desarrollo y más">
+    <title>Blog | Matías Daza</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Personal CSS -->
+    <link href="css/index.css" rel="stylesheet">
+    <!-- Blog CSS -->
+    <link href="css/blog.css" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light fixed-top" aria-label="Navegación principal">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">MDA</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#sec-1" class="nav-link">Work</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#sec-2" class="nav-link">AquaWitchers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#sec-3" class="nav-link">Fútbol</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#sec-4" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="blog.html" class="nav-link active">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-header">
+            <div class="container">
+                <h1>Blog</h1>
+                <p class="lead">Artículos sobre tecnología, desarrollo y más</p>
+                <!--<div class="search-container">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar artículos..." aria-label="Buscar artículos">
+                        <button class="btn btn-outline-light" type="button">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="row">
+                <!-- Artículo destacado -->
+                <div class="col-12 mb-5">
+                    <div class="card blog-post">
+                        <img src="imagenes/blog/featured.jpg" class="card-img-top" alt="Imagen destacada">
+                        <div class="card-body">
+                            <div class="post-meta mb-2">
+                                <span><i class="bi bi-calendar"></i> 15 de Abril, 2024</span>
+                                <span class="ms-3"><i class="bi bi-clock"></i> 5 min de lectura</span>
+                            </div>
+                            <h2 class="card-title">
+                                <a href="blog/posts/desarrollo-web-tendencias-2024.html" class="text-decoration-none">El Futuro del Desarrollo Web: Tendencias 2024</a>
+                            </h2>
+                            <p class="card-text">Explorando las últimas tendencias en desarrollo web y cómo están cambiando la forma en que construimos aplicaciones modernas.</p>
+                            <div class="post-tags">
+                                <span class="tag">Desarrollo Web</span>
+                                <span class="tag">Tendencias</span>
+                                <span class="tag">Tecnología</span>
+                            </div>
+                            <a href="blog/posts/desarrollo-web-tendencias-2024.html" class="btn btn-outline-light mt-3">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Artículos recientes -->
+                <div class="col-md-6 mb-4">
+                    <div class="card blog-post h-100">
+                        <div class="card-body">
+                            <div class="post-meta mb-2">
+                                <span><i class="bi bi-calendar"></i> 10 de Abril, 2024</span>
+                                <span class="ms-3"><i class="bi bi-clock"></i> 3 min de lectura</span>
+                            </div>
+                            <h3 class="card-title h5">
+                                <a href="blog/posts/optimizacion-bases-datos.html" class="text-decoration-none">Optimización de Bases de Datos: Mejores Prácticas</a>
+                            </h3>
+                            <p class="card-text">Consejos y técnicas para mejorar el rendimiento de tus bases de datos y consultas SQL.</p>
+                            <div class="post-tags">
+                                <span class="tag">Bases de Datos</span>
+                                <span class="tag">SQL</span>
+                                <span class="tag">Optimización</span>
+                            </div>
+                            <a href="blog/posts/optimizacion-bases-datos.html" class="btn btn-outline-light mt-3">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card blog-post h-100">
+                        <div class="card-body">
+                            <div class="post-meta mb-2">
+                                <span><i class="bi bi-calendar"></i> 5 de Abril, 2024</span>
+                                <span class="ms-3"><i class="bi bi-clock"></i> 4 min de lectura</span>
+                            </div>
+                            <h3 class="card-title h5">Inteligencia Artificial en el Desarrollo de Software</h3>
+                            <p class="card-text">Cómo la IA está transformando el proceso de desarrollo de software y qué herramientas están disponibles.</p>
+                            <div class="post-tags">
+                                <span class="tag">IA</span>
+                                <span class="tag">Desarrollo</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-light mt-3">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Paginación -->
+            <!--<nav aria-label="Navegación de páginas" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Siguiente</a>
+                    </li>
+                </ul>
+            </nav>-->
+        </section>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html> 
