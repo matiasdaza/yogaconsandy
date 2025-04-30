@@ -68,15 +68,15 @@ section {
 
 /* Estilos para el texto principal */
 #sec-0 .container h1 {
-    font-size: 3rem; /* Tamaño grande para que sea más llamativo */
-    font-weight: bold; /* Negrita para hacer el texto más pesado */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para mejorar la legibilidad */
+    font-size: 3rem !important; /* Tamaño grande para que sea más llamativo */
+    font-weight: bold !important; /* Negrita para hacer el texto más pesado */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important; /* Sombra para mejorar la legibilidad */
 }
 
 #sec-0 .container p {
-    font-size: 1rem; /* Tamaño más grande para el texto */
-    color: white; /* Color blanco para asegurar visibilidad */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Sombra sutil para mayor contraste */
+    font-size: 1rem !important; /* Tamaño más grande para el texto */
+    color: white !important; /* Color blanco para asegurar visibilidad */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6) !important; /* Sombra sutil para mayor contraste */
 }
 
 /* Estilos para las secciones con fondo oscuro */
