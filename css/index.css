@@ -148,7 +148,7 @@ a:hover {
 
 /* Estilos para imágenes dentro de las tarjetas */
 .card img {
-    width: 100%;
+    width: 5rem;
     height: auto;
     border-radius: var(--border-radius);
 }
@@ -227,10 +227,6 @@ height: auto;
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: var(--color-btn2);
     --bs-btn-disabled-border-color: var(--color-btn2);
-}
-
-.card img {
-    width: 5rem;
 }
 
 .carousel-control-prev-icon,
