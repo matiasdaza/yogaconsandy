@@ -238,3 +238,9 @@ height: auto;
   background-color: var(--color-primary); /* semitransparente oscuro */
   border-radius: 50%;
 }
+/* Corrección de tamaño para imágenes de testimonios */
+.img-testimonio {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
