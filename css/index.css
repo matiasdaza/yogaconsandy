@@ -14,12 +14,6 @@
     --color-btn2-hover: #401b13;
     --border-radius: 4px;       /* Radio de borde para elementos */
     --transition-speed: 0.3s;   /* Velocidad de transiciones */
-    
-    /* Nuevas variables para tipografía responsiva */
-    --font-size-base: 16px;
-    --font-size-h1: clamp(2rem, 5vw, 3rem);
-    --font-size-h2: clamp(1.5rem, 4vw, 2.5rem);
-    --font-size-p: clamp(1rem, 2vw, 1.2rem);
 }
 
 /* Reset y configuración base para todos los elementos */
@@ -28,14 +22,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* Soporte para preferencias de movimiento reducido */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        transition: none !important;
-        animation: none !important;
-    }
 }
 
 /* Estilos base del cuerpo del documento */
@@ -54,12 +40,11 @@ main {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    contain: layout paint; /* Mejora de rendimiento */
 }
 
 /* Estilos para todas las secciones */
 section {
-    padding: clamp(1rem, 3vw, 2rem);
+    padding: 2rem 1rem;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -72,7 +57,7 @@ section {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: clamp(1rem, 3vw, 2rem);
+    padding: 0 2rem;
 }
 
 /* Estilos específicos para la sección de inicio */
@@ -83,15 +68,15 @@ section {
 
 /* Estilos para el texto principal */
 #sec-0 .container h1 {
-    font-size: var(--font-size-h1) !important;
-    font-weight: bold !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
+    font-size: 3rem !important; /* Tamaño grande para que sea más llamativo */
+    font-weight: bold !important; /* Negrita para hacer el texto más pesado */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important; /* Sombra para mejorar la legibilidad */
 }
 
 #sec-0 .container p {
-    font-size: var(--font-size-p) !important;
-    color: white !important;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6) !important;
+    font-size: 1rem !important; /* Tamaño más grande para el texto */
+    color: white !important; /* Color blanco para asegurar visibilidad */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6) !important; /* Sombra sutil para mayor contraste */
 }
 
 /* Estilos para las secciones con fondo oscuro */
@@ -103,13 +88,11 @@ section {
 h1, h2 {
     margin-bottom: 1rem;
     font-weight: 500;
-    font-size: var(--font-size-h2);
 }
 
 /* Estilos para párrafos */
 p {
     margin-bottom: 1rem;
-    font-size: var(--font-size-p);
 }
 
 /* Estilos para enlaces */
@@ -127,10 +110,7 @@ a:hover {
 /* Estilos para la barra de navegación */
 .navbar {
     background-color: var(--color-navbar);
-    padding: clamp(0.5rem, 2vw, 1rem);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    padding: 1rem;
 }
 
 /* Estilos para la marca y enlaces de navegación */
@@ -159,7 +139,6 @@ a:hover {
     background-color: var(--color-terminal);
     border: none;
     transition: transform var(--transition-speed) ease;
-    contain: content; /* Mejora de rendimiento */
 }
 
 /* Efecto hover para las tarjetas */
@@ -171,8 +150,6 @@ a:hover {
 .card img {
     width: 100%;
     height: auto;
-    aspect-ratio: 16/9;
-    object-fit: cover;
     border-radius: var(--border-radius);
 }
 
@@ -189,13 +166,33 @@ a:hover {
     overflow: hidden;
 }
 
-/* Estilos para botones */
-.btn-1, .btn-2 {
-    position: relative;
-    overflow: hidden;
-    transition: all var(--transition-speed) ease;
+/* Media queries para diseño responsivo */
+@media (max-width: 768px) {
+    section {
+        padding: 1rem;
+    }
+    
+    .container {
+        padding: 0 0.5rem;
+    }
 }
 
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px; /* Distancia desde el borde inferior */
+    right: 20px; /* Distancia desde el borde derecho */
+    z-index: 9999; /* Asegura que el ícono esté encima de otros elementos */
+    border-radius: 50%; /* Opcional, para darle un borde redondeado */
+    background-color: #25d366; /* El color verde característico de WhatsApp */
+    padding: 10px; /* Espaciado alrededor del ícono */
+  }
+  
+.whatsapp-icon img {
+max-width: 100%;
+height: auto;
+}
+
+/* Estilos para botones */
 .btn-1 {
     background-color: var(--color-btn1);
     --bs-btn-color: #fff;
@@ -232,97 +229,18 @@ a:hover {
     --bs-btn-disabled-border-color: var(--color-btn2);
 }
 
-/* Mejorar la accesibilidad del botón de WhatsApp */
-.whatsapp-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
-    border-radius: 50%;
-    background-color: #25d366;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-}
-
-.whatsapp-icon:hover {
-    transform: scale(1.1);
-}
-
-.whatsapp-icon img {
-    max-width: 100%;
-    height: auto;
+.card img {
+    width: 5rem;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: var(--color-primary);
-    border-radius: 50%;
+  background-color: var(--color-primary); /* semitransparente oscuro */
+  border-radius: 50%;
 }
-
 /* Corrección de tamaño para imágenes de testimonios */
 .img-testimonio {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-}
-
-/* Media queries para diseño responsivo */
-@media (max-width: 1200px) {
-    .container {
-        padding: clamp(1rem, 2vw, 1.5rem);
-    }
-}
-
-@media (max-width: 992px) {
-    .container {
-        padding: clamp(0.75rem, 1.5vw, 1.25rem);
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        padding: 0.5rem;
-    }
-    
-    #sec-0 .container h1 {
-        font-size: clamp(2rem, 8vw, 3rem) !important;
-    }
-    
-    .container {
-        padding: 0.5rem;
-    }
-    
-    .card {
-        margin-bottom: 1rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .container {
-        padding: 0.25rem;
-    }
-    
-    .whatsapp-icon {
-        bottom: 15px;
-        right: 15px;
-        padding: 8px;
-    }
-}
-
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-terminal: #1a1a1a;
-        --color-text: #e0e0e0;
-        --color-hover: #bf8a8a;
-    }
-    
-    .slider-1, .slider-2, .slider-3, .slider-4, .slider-5 {
-        background-color: var(--color-terminal);
-    }
-    
-    .card {
-        background-color: #2a2a2a;
-    }
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
 }
