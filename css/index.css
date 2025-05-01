@@ -80,7 +80,7 @@ section {
 }
 
 /* Estilos para las secciones con fondo oscuro */
-.slider-1, .slider-2, .slider-3, .slider-4 {
+.slider-1, .slider-2, .slider-3, .slider-4, .slider-5 {
     background-color: var(--color-terminal);
 }
 
@@ -229,5 +229,12 @@ height: auto;
     --bs-btn-disabled-border-color: var(--color-btn2);
 }
 
+.card img {
+    width: 5rem;
+}
 
-
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: var(--color-primary); /* semitransparente oscuro */
+  border-radius: 50%;
+}
