@@ -1,5 +1,14 @@
 /* Estilos específicos para el blog */
 
+/* Variables CSS para el blog */
+:root {
+    --blog-card-height-lg: 400px;
+    --blog-card-height-md: 350px;
+    --blog-card-height-sm: 300px;
+    --blog-card-height-xs: 250px;
+    --blog-card-height-xxs: 200px;
+}
+
 /* Layout general */
 body {
     min-height: 100vh;
@@ -10,6 +19,7 @@ body {
 main {
     flex: 1;
     padding-top: 80px; /* Espacio para la navbar fija */
+    contain: layout paint; /* Mejora de rendimiento */
 }
 
 /* Estilos para las tarjetas de blog */
@@ -18,6 +28,7 @@ main {
     margin-bottom: 2rem;
     background-color: var(--color-terminal);
     border: none;
+    contain: content; /* Mejora de rendimiento */
 }
 
 .blog-post:hover {
@@ -26,14 +37,16 @@ main {
 
 /* Estilos para las imágenes de las tarjetas */
 .card-img-top {
-    height: 400px; /* Altura base para pantallas grandes */
+    height: var(--blog-card-height-lg);
     object-fit: cover;
     width: 100%;
+    aspect-ratio: 16/9;
 }
 
 /* Estilos para los títulos de las tarjetas */
 .card-title {
     color: var(--color-text);
+    font-size: var(--font-size-h2);
 }
 
 /* Metadatos de los posts */
@@ -45,6 +58,9 @@ main {
 /* Etiquetas de los posts */
 .post-tags {
     margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .tag {
@@ -53,15 +69,20 @@ main {
     background-color: var(--color-text);
     border: 1px solid var(--color-hover);
     border-radius: var(--border-radius);
-    margin-right: 0.5rem;
     font-size: 0.8rem;
     color: var(--color-terminal);
+    transition: all var(--transition-speed) ease;
+}
+
+.tag:hover {
+    background-color: var(--color-hover);
+    transform: scale(1.05);
 }
 
 /* Encabezado del blog */
 .blog-header {
     text-align: center;
-    padding: 4rem 0;
+    padding: clamp(2rem, 5vw, 4rem) 0;
     background-color: var(--color-terminal);
     margin-bottom: 3rem;
 }
@@ -70,23 +91,46 @@ main {
 .search-container {
     max-width: 600px;
     margin: 2rem auto 0;
+    position: relative;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-hover);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-p);
+    transition: all var(--transition-speed) ease;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: var(--color-text);
+    box-shadow: 0 0 0 3px rgba(191, 138, 138, 0.2);
 }
 
 /* Paginación */
 .pagination {
     margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .page-link {
     background-color: var(--color-terminal);
     border-color: var(--color-hover);
     color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: all var(--transition-speed) ease;
 }
 
 .page-link:hover {
     background-color: var(--color-hover);
     border-color: var(--color-hover);
     color: var(--color-text);
+    transform: translateY(-2px);
 }
 
 .page-item.active .page-link {
@@ -97,24 +141,75 @@ main {
 /* Ajustes responsivos */
 @media (max-width: 1200px) {
     .card-img-top {
-        height: 350px; /* Altura para pantallas medianas */
+        height: var(--blog-card-height-md);
     }
 }
 
 @media (max-width: 992px) {
     .card-img-top {
-        height: 300px; /* Altura para tablets */
+        height: var(--blog-card-height-sm);
+    }
+    
+    .blog-header {
+        padding: clamp(1.5rem, 4vw, 3rem) 0;
     }
 }
 
 @media (max-width: 768px) {
     .card-img-top {
-        height: 250px; /* Altura para móviles grandes */
+        height: var(--blog-card-height-xs);
+    }
+    
+    .blog-post {
+        margin-bottom: 1.5rem;
+    }
+    
+    .search-container {
+        margin: 1.5rem auto 0;
     }
 }
 
 @media (max-width: 576px) {
     .card-img-top {
-        height: 200px; /* Altura para móviles pequeños */
+        height: var(--blog-card-height-xxs);
+    }
+    
+    .blog-header {
+        padding: clamp(1rem, 3vw, 2rem) 0;
+        margin-bottom: 2rem;
+    }
+    
+    .pagination {
+        margin: 2rem 0;
+    }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+    .blog-post {
+        background-color: #2a2a2a;
+    }
+    
+    .blog-header {
+        background-color: #1a1a1a;
+    }
+    
+    .page-link {
+        background-color: #2a2a2a;
+    }
+    
+    .search-container input {
+        background-color: #2a2a2a;
+        color: var(--color-text);
+    }
+}
+
+/* Soporte para preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    .blog-post,
+    .tag,
+    .page-link {
+        transition: none !important;
+        transform: none !important;
     }
 } 
