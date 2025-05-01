@@ -3,15 +3,16 @@
 
 /* Variables CSS personalizadas para mantener consistencia en el diseño */
 :root {
-    --color-terminal: #fff7ef;  /* Color de fondo para secciones */
-    --color-primary: #bf8a8a;   /* Color principal del sitio */
+    --color-terminal: #fff;  /* Color de fondo para secciones */
+    --color-primary: #fff7ef;   /* Color principal del sitio */
+    --color-secondary: #bf8a8a;   /* Color principal del sitio */
     --color-text: #bf8a8a;      /* Color del texto */
-    --color-hover: #8c6961;     /* Color para efectos hover */
+    --color-hover: #f8b1b1;     /* Color para efectos hover */
     --color-navbar: #bf8a8a;
     --color-btn1: #bf8a8a;
-    --color-btn2: #8c6961;
-    --color-btn1-hover: #8c6961;
-    --color-btn2-hover: #401b13;
+    --color-btn2: #f8b1b1;
+    --color-btn1-hover: #f8b1b1;
+    --color-btn2-hover: #8c6961;
     --border-radius: 4px;       /* Radio de borde para elementos */
     --transition-speed: 0.3s;   /* Velocidad de transiciones */
 }
@@ -29,7 +30,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-btn2-hover);
+    background-color: var(--color-terminal);
     color: var(--color-text);
     min-height: 100vh;
     line-height: 1.5;
@@ -231,6 +232,6 @@ height: auto;
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: var(--color-primary); /* semitransparente oscuro */
+  background-color: var(--color-secondary); /* semitransparente oscuro */
   border-radius: 50%;
 }
