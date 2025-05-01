@@ -235,3 +235,9 @@ height: auto;
   background-color: var(--color-secondary); /* semitransparente oscuro */
   border-radius: 50%;
 }
+
+.accordion-button:not(.collapsed){
+    background-color: var(--color-secondary);
+    color: #fff;
+    border-color: var(--color-secondary);
+}
