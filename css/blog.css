@@ -31,6 +31,12 @@ main {
     width: 100%;
 }
 
+.card img {
+    height: 200px; /* Altura base para pantallas grandes */
+    object-fit: cover;
+    width: 100%;
+}
+
 /* Estilos para los títulos de las tarjetas */
 .card-title {
     color: var(--color-text);
@@ -62,8 +68,8 @@ main {
 .blog-header {
     text-align: center;
     padding: 4rem 0;
-    background-color: var(--color-terminal);
     margin-bottom: 3rem;
+    color: white;
 }
 
 /* Contenedor de búsqueda */
@@ -118,3 +124,8 @@ main {
         height: 200px; /* Altura para móviles pequeños */
     }
 } 
+
+.text-right-link {
+    display: block;
+    text-align: right;
+  }
