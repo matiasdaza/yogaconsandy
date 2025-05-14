@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$dbname = 'test';
-$username = 'root';
-$password = ''; // Cambia si tienes contraseña en MySQL
+$host = 'srv1075.hstgr.io';      // Ej: 'localhost' o 'mysql.hostinger.com'
+$dbname = 'u897077398_VishnuBD';    // Ej: 'u123456789_mibd'
+$username = 'u897077398_ShivaADM';       // Ej: 'u123456789_user'
+$password = 'Sonic2018@';
 
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
