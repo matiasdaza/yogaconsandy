@@ -1,5 +1,5 @@
 <?php
-$host = 'srv1075.hstgr.io';      // Ej: 'localhost' o 'mysql.hostinger.com'
+$host = 'localhost';      // Ej: 'localhost' o 'mysql.hostinger.com'
 $dbname = 'u897077398_VishnuBD';    // Ej: 'u123456789_mibd'
 $username = 'u897077398_ShivaADM';       // Ej: 'u123456789_user'
 $password = 'D9n$mhC9tL>';
