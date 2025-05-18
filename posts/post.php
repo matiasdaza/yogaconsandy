@@ -59,31 +59,32 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a data-easing="easeInOutQuad" href="index.html" class="nav-link active" aria-current="page">Home</a>
+                            <a data-easing="easeInOutQuad" href="../index.html" class="nav-link active" aria-current="page">Home</a>
                         </li>
                         <li class="nav-item"> 
-                            <a data-easing="easeInOutQuad" href="index.html#sec-1" class="nav-link">Acerca de mi</a>
+                            <a data-easing="easeInOutQuad" href="../index.html#sec-1" class="nav-link">Acerca de mi</a>
                         </li>
                         <!-- Deshabilitado-->
                         <!-- <li class="nav-item">
                             <a data-easing="easeInOutQuad" href="index.html#sec-2" class="nav-link">Instagram</a>
                         </li> -->
                         <li class="nav-item">
-                            <a data-easing="easeInOutQuad" href="index.html#sec-3" class="nav-link">Clases</a>
+                            <a data-easing="easeInOutQuad" href="../index.html#sec-3" class="nav-link">Clases</a>
                         </li>
                         <!-- Deshabilitado-->
                         <!-- <li class="nav-item">
                             <a data-easing="easeInOutQuad" href="index.html#sec-4" class="nav-link">Testimonios</a>
                         </li> -->
                         <li class="nav-item">
-                            <a data-easing="easeInOutQuad" href="index.html#sec-5" class="nav-link">Preguntas frecuentes</a>
+                            <a data-easing="easeInOutQuad" href="../index.html#sec-5" class="nav-link">Preguntas frecuentes</a>
                         </li>
                         <li class="nav-item">
-                            <a data-easing="easeInOutQuad" href="blog.html" class="nav-link">Blog</a>
+                            <a data-easing="easeInOutQuad" href="../blog.php" class="nav-link">Blog</a>
                         </li>
-                        <li class="nav-item">
-                            <a data-easing="easeInOutQuad" href="nuevo-post.php" class="nav-link">Crear nuevo post</a>
-                        </li>
+                        <!-- Deshabilitado-->
+                        <!--<li class="nav-item">
+                            <a data-easing="easeInOutQuad" href="../nuevo-post.php" class="nav-link">Crear nuevo post</a>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -96,13 +97,18 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
                         <div class="col-lg-8">
                             <header class="mb-4">
                                 <div class="post-meta mb-3">
-                                    <span><i class="bi bi-calendar"></i> <?= $post['fecha_publicacion'] ?></span>
+                                <?php
+                                $fecha = $postData['fecha_publicacion'];
+                                setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                                #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                                $date = new DateTime($fecha);
+                                ?>
+                                    <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
                                     <span class="ms-3"><i class="bi bi-clock"></i> <?= $post['tiempo_lectura'] ?> min de lectura</span>
                                 </div>
                                 <h1 class="mb-4"><?= htmlspecialchars($post['titulo']) ?></h1>
                                 <div class="post-tags mb-4">
-                                    <span class="tag">Transformación</span>
-                                    <span class="tag">Sanación</span>
+                                    <span class="tag">Yoga</span>
                                 </div>
                                 <?php if (!empty($post['portada'])): ?>
                                 <img src="../<?= htmlspecialchars($post['portada']) ?>" class=" img-fluid rounded mb-4" alt="Portada" title="Portada">

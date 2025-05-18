@@ -78,11 +78,12 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                             <a data-easing="easeInOutQuad" href="index.html#sec-5" class="nav-link">Preguntas frecuentes</a>
                         </li>
                         <li class="nav-item">
-                            <a data-easing="easeInOutQuad" href="blog.html" class="nav-link">Blog</a>
+                            <a data-easing="easeInOutQuad" href="blog.php" class="nav-link">Blog</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- Deshabilitado-->
+                        <!--<li class="nav-item">
                             <a data-easing="easeInOutQuad" href="nuevo-post.php" class="nav-link">Crear nuevo post</a>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
             </div>
@@ -115,9 +116,14 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                 <div class="col-12 mb-5">
                     <div class="card blog-post">
                         <div class="card-body">
-                            <div class="post-meta mb-2">
-                                <span><i class="bi bi-calendar"></i> 12 de mayo, 2025</span>
-                                <span class="ms-3"><i class="bi bi-clock"></i> 7 min de lectura</span>
+                            <?php
+                            $fecha = $postData['fecha_publicacion'];
+                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                            #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                            $date = new DateTime($fecha);
+                            ?>
+                                <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
+                                <span class="ms-3"><i class="bi bi-clock"></i> <?= $postData['tiempo_lectura'] ?> min de lectura</span>
                             </div>
                             <h2 class="card-title">
                                 <a href="posts/post.php?id=<?= $postData['id'] ?>"class="text-decoration-none"><?= htmlspecialchars($postData['titulo']) ?></a>
@@ -134,8 +140,7 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                             <?php endif; ?>
                         
                             <div class="post-tags">
-                                <span class="tag">Transformación</span>
-                                <span class="tag">Sanación</span>
+                                <span class="tag">Yoga</span>
                             </div>
                             <br>
                             <a href="posts/post.php?id=<?= $postData['id'] ?>" class="btn btn-2 btn-lg">Leer más</a>
@@ -151,7 +156,13 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                     <div class="card blog-post h-100">
                         <div class="card-body">
                             <div class="post-meta mb-2">
-                                <span><i class="bi bi-calendar"></i> <?= $post['fecha_publicacion'] ?></span>
+                            <?php
+                            $fecha = $post['fecha_publicacion'];
+                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                            #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                            $date = new DateTime($fecha);
+                            ?>
+                                <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
                                 <span class="ms-3"><i class="bi bi-clock"></i> <?= $post['tiempo_lectura'] ?> min de lectura</span>
                             </div>
                             <h3 class="card-title">
@@ -170,35 +181,13 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                             <?php endif; ?>
                             <div class="post-tags">
                                 <span class="tag">Yoga</span>
-                                <span class="tag">Maternidad</span>
-                                <span class="tag">Superación</span>
                             </div>
-                            <a href="blog/posts/soy-mama-y-profesora-de-yoga.html" class="btn btn-outline-light mt-3">Leer más</a>
+                            <a href="posts/post.php?id=<?= $post['id'] ?>" class="btn btn-2 btn-lg">Leer más</a>
                         </div>
                     </div>
                 </div>
                 <?php endforeach; ?>
               </div>
-
-                <!--
-                <div class="col-md-6 mb-4">
-                    <div class="card blog-post h-100">
-                        <div class="card-body">
-                            <div class="post-meta mb-2">
-                                <span><i class="bi bi-calendar"></i> 5 de Abril, 2024</span>
-                                <span class="ms-3"><i class="bi bi-clock"></i> 4 min de lectura</span>
-                            </div>
-                            <h3 class="card-title h5">Inteligencia Artificial en el Desarrollo de Software</h3>
-                            <p class="card-text">Cómo la IA está transformando el proceso de desarrollo de software y qué herramientas están disponibles.</p>
-                            <div class="post-tags">
-                                <span class="tag">IA</span>
-                                <span class="tag">Desarrollo</span>
-                            </div>
-                            <a href="#" class="btn btn-outline-light mt-3">Leer más</a>
-                        </div>
-                    </div>
-                </div>
-                -->
             </div>
             
             <!-- Paginación -->
