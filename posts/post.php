@@ -48,7 +48,7 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
         <nav class="navbar navbar-expand-md navbar-light fixed-top" aria-label="Navegación principal">
             <div class="container-fluid">
                 <!-- Logo/Marca del sitio -->
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="../index.html">
                     <img src="../imagenes/logo.png" alt="Logo Yoga con Sandy" title="Logo Yoga con Sandy" style="max-height: 4rem; width: auto;">
                 </a>
                 <!-- Botón para el menú móvil -->

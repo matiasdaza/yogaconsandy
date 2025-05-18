@@ -96,7 +96,7 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
             <div class="background-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('imagenes/fondo1.jpg'); background-size: cover; background-position: center; opacity: 0.85; z-index: -1;"></div>
         
             <div class="container">
-                <h1>Blog2: Yoga con Sandy</h1>
+                <h1>Blog: Yoga con Sandy</h1>
                 <p class="lead">Yoga, maternidad, autismo, emprendimiento</p>
                 <!--<div class="search-container">
                     <div class="input-group">
