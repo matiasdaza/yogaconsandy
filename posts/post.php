@@ -121,27 +121,71 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
                                   </article>
                                                             
                             </div>
-
-                            <!-- Pie de página para artículos del blog-->
-                            <footer class="mt-5 pt-4 border-top">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                      <h5>Sígueme en</h5>
-                                        <div class="social-share mt-2">
-                                            <a href="https://www.instagram.com/yogaconsandy/"><i class="bi bi-instagram"></i></a>
-                                            <a href="https://www.facebook.com/ShaktiYogaCuracavi"><i class="bi bi-facebook"></i></a>
-                                            <a href="https://www.linkedin.com/in/sandy-tamara-arce-palacios-16b125149/"><i class="bi bi-linkedin"></i></a>
-                                            <a href="https://www.youtube.com/@Yogaconsandy"><i class="bi bi-youtube"></i></a>
-                                        </div>
-                                    </div>
-                                    <a href="../blog.php" class="btn btn-1 btn-sm">
-                                        <i class="bi bi-arrow-left"></i> Volver al blog
-                                    </a>
-                                </div>
-                            </footer>
                         </div>
                     </div>
         </article>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+
+                    <?php
+                    $stmt = $db->prepare("SELECT autor, contenido, fecha FROM comentarios WHERE post_id = ? ORDER BY fecha DESC");
+                    $stmt->execute([$post['id']]);
+                    $comentarios = $stmt->fetchAll();
+                    ?>
+
+                    <h4>Únete a la conversación:</h4>
+                    <form action="procesar_comentario.php" method="POST">
+                        <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                        <div class="mb-2">
+                            <input type="text" name="autor" class="form-control" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="mb-2">
+                            <textarea name="contenido" class="form-control" placeholder="Escribe tu comentario..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-1 btn-sm">Enviar comentario</button>
+                    </form>
+                    <br>
+
+                    <h4>Comentarios:</h4>
+                    <?php foreach ($comentarios as $c): ?>
+                    <div class="mb-3 border p-2 rounded comentarios">
+                        <?php
+                            $fechaComentario = $c['fecha'];
+                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                            #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                            $date = new DateTime($fechaComentario);
+                        ?>
+                        <strong><?= htmlspecialchars($c['autor']) ?></strong> <em><?= strftime("%e de %B, %Y - %H:%M", $date->getTimestamp()) ?></em>
+                        <p><?= nl2br(htmlspecialchars($c['contenido'])) ?></p>
+                    </div>
+                    <?php endforeach; ?>
+                    
+                    
+
+                    <!-- Pie de página para artículos del blog-->
+                    <footer class="mt-5 pt-4 border-top">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5>Sígueme en</h5>
+                                <div class="social-share mt-2">
+                                    <a href="https://www.instagram.com/yogaconsandy/"><i class="bi bi-instagram"></i></a>
+                                    <a href="https://www.facebook.com/ShaktiYogaCuracavi"><i class="bi bi-facebook"></i></a>
+                                    <a href="https://www.linkedin.com/in/sandy-tamara-arce-palacios-16b125149/"><i class="bi bi-linkedin"></i></a>
+                                    <a href="https://www.youtube.com/@Yogaconsandy"><i class="bi bi-youtube"></i></a>
+                                </div>
+                            </div>
+                            <a href="../blog.php" class="btn btn-1 btn-sm">
+                                <i class="bi bi-arrow-left"></i> Volver al blog
+                            </a>
+                        </div>
+                    </footer>
+                </div>    
+            </div>
+        </div>
     </main>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
