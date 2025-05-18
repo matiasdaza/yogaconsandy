@@ -1,3 +1,9 @@
+<?php
+include 'includes/db.php';
+$posts = $db->query("SELECT * FROM posts ORDER BY fecha_publicacion DESC");
+$postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM posts)");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,7 +24,6 @@
       'https://www.googletagmanager.com/gtm.js?id=GTM-NJQP2NHS'+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer','GTM-NJQP2NHS');</script>
     <!-- End Google Tag Manager -->
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +39,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJQP2NHS"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
     <header>
         <nav class="navbar navbar-expand-md navbar-light fixed-top" aria-label="Navegación principal">
             <div class="container-fluid">
@@ -69,8 +78,12 @@
                             <a data-easing="easeInOutQuad" href="index.html#sec-5" class="nav-link">Preguntas frecuentes</a>
                         </li>
                         <li class="nav-item">
-                            <a data-easing="easeInOutQuad" href="blog.html" class="nav-link">Blog</a>
+                            <a data-easing="easeInOutQuad" href="blog.php" class="nav-link">Blog</a>
                         </li>
+                        <!-- Deshabilitado-->
+                        <!--<li class="nav-item">
+                            <a data-easing="easeInOutQuad" href="nuevo-post.php" class="nav-link">Crear nuevo post</a>
+                        </li>-->
                     </ul>
                 </div>
             </div>
@@ -97,75 +110,85 @@
         </section>
 
         <section class="container">
+        <?php $postData = $postDestacado->fetch(PDO::FETCH_ASSOC); ?>
             <div class="row">
                 <!-- Artículo destacado -->
                 <div class="col-12 mb-5">
                     <div class="card blog-post">
                         <div class="card-body">
                             <div class="post-meta mb-2">
-                                <span><i class="bi bi-calendar"></i> 12 de mayo, 2025</span>
-                                <span class="ms-3"><i class="bi bi-clock"></i> 7 min de lectura</span>
+                            <?php
+                            $fecha = $postData['fecha_publicacion'];
+                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                            #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                            $date = new DateTime($fecha);
+                            ?>
+                                <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
+                                <span class="ms-3"><i class="bi bi-clock"></i> <?= $postData['tiempo_lectura'] ?> min de lectura</span>
                             </div>
                             <h2 class="card-title">
-                                <a href="blog/posts/yoga-como-refugio.html" class="text-decoration-none">El Yoga como Refugio 🧘‍♀️</a>
+                                <a href="posts/post.php?id=<?= $postData['id'] ?>"class="text-decoration-none"><?= htmlspecialchars($postData['titulo']) ?></a>
                             </h2>
-                            <p class="card-text"><strong>A veces, la vida nos sacude.</strong> Nos empuja, nos exige, nos desordena. Hay momentos en los que sentimos que todo lo que habíamos construido comienza a tambalearse, y con ello, también <em>nos tambaleamos nosotras mismas, nosotros mismos</em>. Fue justo en uno de esos momentos, en medio del caos y la confusión, que <strong>encontré el yoga</strong>. O quizás, <em>el yoga me encontró a mí</em>.</p>  
+                            <?php
+                                $html = $postData['html'];
+                                preg_match('/<p>(.*?)<\/p>/s', $html, $matches)// Obtiene el primer párrafo completo con etiqueta <p>
+                            ?>
+
+                            <p class="card-text"><?= $matches[0] ?></p>
                             <br>
-                            <img src="imagenes/yoga-como-refugio.jpg" class=" img-fluid rounded mb-4" alt="Imagen destacada" title="Imagen destacada">
+                            <?php if (!empty($postData['portada'])): ?>
+                            <img src="<?= htmlspecialchars($postData['portada']) ?>" class="img-fluid rounded mb-4 card-img-top" alt="Portada" title="Portada">
+                            <?php endif; ?>
                         
                             <div class="post-tags">
-                                <span class="tag">Transformación</span>
-                                <span class="tag">Sanación</span>
+                                <span class="tag">Yoga</span>
                             </div>
                             <br>
-                            <a href="blog/posts/yoga-como-refugio.html" class="btn btn-2 btn-lg">Leer más</a>
+                            <a href="posts/post.php?id=<?= $postData['id'] ?>" class="btn btn-2 btn-lg">Leer más</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Artículos recientes -->
 
+
+                <?php foreach ($posts as $post): ?>        
                 <div class="col-md-6 mb-4">
                     <div class="card blog-post h-100">
                         <div class="card-body">
                             <div class="post-meta mb-2">
-                                <span><i class="bi bi-calendar"></i> 05 de mayo, 2025</span>
-                                <span class="ms-3"><i class="bi bi-clock"></i> 5 min de lectura</span>
+                            <?php
+                            $fecha = $post['fecha_publicacion'];
+                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                            #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                            $date = new DateTime($fecha);
+                            ?>
+                                <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
+                                <span class="ms-3"><i class="bi bi-clock"></i> <?= $post['tiempo_lectura'] ?> min de lectura</span>
                             </div>
                             <h3 class="card-title">
-                                <a href="blog/posts/soy-mama-y-profesora-de-yoga.html" class="text-decoration-none">🧘‍♀️ Soy mamá y profesora de yoga: buscando el equilibrio</a>
+                                <a href="posts/post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['titulo']) ?></a>
                             </h3>
-                            <p class="card-text">Soy madre desde hace casi <strong>siete años</strong>. Me gradué como <em>profesora de yoga</em> en diciembre de 2017, y en febrero del 2018 me enteré de que estaba <strong>embarazada</strong>. Ese mismo año nació mi hija.</p>
+                            <?php
+                                $html = $post['html'];
+                                preg_match('/<p>(.*?)<\/p>/s', $html, $matches)// Obtiene el primer párrafo completo con etiqueta <p>
+                            ?>
+
+                            <p class="card-text"><?= $matches[0] ?></p>
+                            
                             <br>
-                            <img src="imagenes/soy-mama-y-profesora-de-yoga.jpeg" class="img-fluid rounded mb-4" alt="Imagen articulo reciente 1" title="Imagen articulo reciente 1">
+                            <?php if (!empty($post['portada'])): ?>
+                            <img src="<?= htmlspecialchars($post['portada']) ?>" class=" img-fluid rounded mb-4 card-img-normal" alt="Imagen articulos recientes" title="Imagen articulos recientes">
+                            <?php endif; ?>
                             <div class="post-tags">
                                 <span class="tag">Yoga</span>
-                                <span class="tag">Maternidad</span>
-                                <span class="tag">Superación</span>
                             </div>
-                            <a href="blog/posts/soy-mama-y-profesora-de-yoga.html" class="btn btn-outline-light mt-3">Leer más</a>
+                            <a href="posts/post.php?id=<?= $post['id'] ?>" class="btn btn-2 btn-lg">Leer más</a>
                         </div>
                     </div>
                 </div>
-                <!--
-                <div class="col-md-6 mb-4">
-                    <div class="card blog-post h-100">
-                        <div class="card-body">
-                            <div class="post-meta mb-2">
-                                <span><i class="bi bi-calendar"></i> 5 de Abril, 2024</span>
-                                <span class="ms-3"><i class="bi bi-clock"></i> 4 min de lectura</span>
-                            </div>
-                            <h3 class="card-title h5">Inteligencia Artificial en el Desarrollo de Software</h3>
-                            <p class="card-text">Cómo la IA está transformando el proceso de desarrollo de software y qué herramientas están disponibles.</p>
-                            <div class="post-tags">
-                                <span class="tag">IA</span>
-                                <span class="tag">Desarrollo</span>
-                            </div>
-                            <a href="#" class="btn btn-outline-light mt-3">Leer más</a>
-                        </div>
-                    </div>
-                </div>
-                -->
+                <?php endforeach; ?>
+              </div>
             </div>
             
             <!-- Paginación -->
