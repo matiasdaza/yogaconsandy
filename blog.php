@@ -116,6 +116,7 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                 <div class="col-12 mb-5">
                     <div class="card blog-post">
                         <div class="card-body">
+                            <div class="post-meta mb-2">
                             <?php
                             $fecha = $postData['fecha_publicacion'];
                             setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
