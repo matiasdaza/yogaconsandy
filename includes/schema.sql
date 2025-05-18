@@ -8,6 +8,8 @@ CREATE TABLE posts (
     fecha_publicacion TEXT
 );
 
+ALTER TABLE posts ADD COLUMN portada VARCHAR(255);
+
 CREATE TABLE etiquetas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL UNIQUE
