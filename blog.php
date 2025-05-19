@@ -1,6 +1,6 @@
 <?php
 include "includes/db.php";
-$posts = $db->query("SELECT * FROM posts ORDER BY fecha_publicacion DESC");
+$posts = $db->query("SELECT * FROM posts where id != (SELECT MAX(id) FROM posts) ORDER BY fecha_publicacion DESC");
 $postDestacado = $db->query(
     "SELECT * FROM posts where id = (SELECT MAX(id) FROM posts)"
 );
