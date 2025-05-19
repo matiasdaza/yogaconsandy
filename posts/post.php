@@ -34,8 +34,8 @@ if (!$post) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Yoga con Sandy - Blog">
-    <title>Yoga con Sandy - Blog</title>
+    <meta name="description" content="Lee este artículo">
+    <title><?= htmlspecialchars($post['titulo']) ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Personal CSS -->
@@ -44,6 +44,14 @@ if (!$post) {
     <link href="../css/blog.css" rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Metadata para previsualización -->
+    <meta property="og:title" content="<?= htmlspecialchars($post['titulo']) ?>" />
+    <meta property="og:description" content="Lee este artículo" />
+    <meta property="og:image" content="../<?= htmlspecialchars($post['portada']) ?>" />
+    <meta property="og:url" content="https://www.yogaconsandy.cl" />
+    <meta property="og:type" content="article" />
+    <meta property="article:author" content="https://www.yogaconsandy.cl/index.html#sec-1" />
+    <meta property="article:published_time" content="<?= $post['fecha_publicacion'] ?>" />
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -104,7 +112,7 @@ if (!$post) {
                             <header class="mb-4">
                                 <div class="post-meta mb-3">
                                 <?php
-                                $fecha = $postData['fecha_publicacion'];
+                                $fecha = $post['fecha_publicacion'];
                                 setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
                                 #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
                                 $date = new DateTime($fecha);
