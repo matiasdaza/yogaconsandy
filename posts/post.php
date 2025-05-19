@@ -4,6 +4,12 @@ $id = $_GET['id'];
 $stmt = $db->prepare("SELECT * FROM posts WHERE id = ?");
 $stmt->execute([$id]);
 $post = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$post) {
+    header("Location: ../blog.php"); // si no hay resultados
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
