@@ -1,7 +1,9 @@
 <?php
-include 'includes/db.php';
-$posts = $db->query("SELECT * FROM posts ORDER BY fecha_publicacion DESC");
-$postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM posts)");
+include "includes/db.php";
+$posts = $db->query("SELECT * FROM posts where id != (SELECT MAX(id) FROM posts) ORDER BY fecha_publicacion DESC");
+$postDestacado = $db->query(
+    "SELECT * FROM posts where id = (SELECT MAX(id) FROM posts)"
+);
 ?>
 
 <!DOCTYPE html>
@@ -117,34 +119,55 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                     <div class="card blog-post">
                         <div class="card-body">
                             <div class="post-meta mb-2">
-                            <?php
-                            $fecha = $postData['fecha_publicacion'];
-                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
-                            #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
-                            $date = new DateTime($fecha);
-                            ?>
-                                <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
-                                <span class="ms-3"><i class="bi bi-clock"></i> <?= $postData['tiempo_lectura'] ?> min de lectura</span>
+                                <?php
+                                $fecha = $postData["fecha_publicacion"];
+                                setlocale(
+                                    LC_TIME,
+                                    "es_ES.UTF-8",
+                                    "es_ES",
+                                    "Spanish_Spain",
+                                    "es"
+                                );
+                                #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                                $date = new DateTime($fecha);
+                                ?>
+                                <span><i class="bi bi-calendar"></i> <?= strftime(
+                                    "%e de %B, %Y",
+                                    $date->getTimestamp()
+                                ) ?></span>
+                                <span class="ms-3"><i class="bi bi-clock"></i> <?= $postData[
+                                    "tiempo_lectura"
+                                ] ?> min de lectura</span>
                             </div>
                             <h2 class="card-title">
-                                <a href="posts/post.php?id=<?= $postData['id'] ?>"class="text-decoration-none"><?= htmlspecialchars($postData['titulo']) ?></a>
+                                <a href="posts/post.php?id=<?= $postData[
+                                    "id"
+                                ] ?>"class="text-decoration-none"><?= htmlspecialchars(
+    $postData["titulo"]
+) ?></a>
                             </h2>
                             <?php
-                                $html = $postData['html'];
-                                preg_match('/<p>(.*?)<\/p>/s', $html, $matches)// Obtiene el primer párrafo completo con etiqueta <p>
-                            ?>
+                            $html = $postData["html"];
+                            preg_match("/<p>(.*?)<\/p>/s", $html, $matches);
 
-                            <p class="card-text"><?= $matches[0] ?></p>
+// Obtiene el primer párrafo completo con etiqueta <p>
+?>
+
+                            <p class="card-text"><?= $matches[1] ?></p>
                             <br>
-                            <?php if (!empty($postData['portada'])): ?>
-                            <img src="<?= htmlspecialchars($postData['portada']) ?>" class="img-fluid rounded mb-4 card-img-top" alt="Portada" title="Portada">
+                            <?php if (!empty($postData["portada"])): ?>
+                            <img src="<?= htmlspecialchars(
+                                $postData["portada"]
+                            ) ?>" class="img-fluid rounded mb-4 card-img-top" alt="Portada" title="Portada">
                             <?php endif; ?>
                         
                             <div class="post-tags">
                                 <span class="tag">Yoga</span>
                             </div>
                             <br>
-                            <a href="posts/post.php?id=<?= $postData['id'] ?>" class="btn btn-2 btn-lg">Leer más</a>
+                            <a href="posts/post.php?id=<?= $postData[
+                                "id"
+                            ] ?>" class="btn btn-2 btn-lg">Leer más</a>
                         </div>
                     </div>
                 </div>
@@ -158,32 +181,53 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                         <div class="card-body">
                             <div class="post-meta mb-2">
                             <?php
-                            $fecha = $post['fecha_publicacion'];
-                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                            $fecha = $post["fecha_publicacion"];
+                            setlocale(
+                                LC_TIME,
+                                "es_ES.UTF-8",
+                                "es_ES",
+                                "Spanish_Spain",
+                                "es"
+                            );
                             #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
                             $date = new DateTime($fecha);
                             ?>
-                                <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
-                                <span class="ms-3"><i class="bi bi-clock"></i> <?= $post['tiempo_lectura'] ?> min de lectura</span>
+                                <span><i class="bi bi-calendar"></i> <?= strftime(
+                                    "%e de %B, %Y",
+                                    $date->getTimestamp()
+                                ) ?></span>
+                                <span class="ms-3"><i class="bi bi-clock"></i> <?= $post[
+                                    "tiempo_lectura"
+                                ] ?> min de lectura</span>
                             </div>
                             <h3 class="card-title">
-                                <a href="posts/post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['titulo']) ?></a>
+                                <a href="posts/post.php?id=<?= $post[
+                                    "id"
+                                ] ?>"><?= htmlspecialchars(
+    $post["titulo"]
+) ?></a>
                             </h3>
                             <?php
-                                $html = $post['html'];
-                                preg_match('/<p>(.*?)<\/p>/s', $html, $matches)// Obtiene el primer párrafo completo con etiqueta <p>
-                            ?>
+                            $html = $post["html"];
+                            preg_match("/<p>(.*?)<\/p>/s", $html, $matches);
 
-                            <p class="card-text"><?= $matches[0] ?></p>
+                    // Obtiene el primer párrafo completo con etiqueta <p>
+                    ?>
+
+                            <p class="card-text"><?= $matches[1] ?></p>
                             
                             <br>
-                            <?php if (!empty($post['portada'])): ?>
-                            <img src="<?= htmlspecialchars($post['portada']) ?>" class=" img-fluid rounded mb-4 card-img-normal" alt="Imagen articulos recientes" title="Imagen articulos recientes">
+                            <?php if (!empty($post["portada"])): ?>
+                            <img src="<?= htmlspecialchars(
+                                $post["portada"]
+                            ) ?>" class=" img-fluid rounded mb-4 card-img-normal" alt="Imagen articulos recientes" title="Imagen articulos recientes">
                             <?php endif; ?>
                             <div class="post-tags">
                                 <span class="tag">Yoga</span>
                             </div>
-                            <a href="posts/post.php?id=<?= $post['id'] ?>" class="btn btn-2 btn-lg">Leer más</a>
+                            <a href="posts/post.php?id=<?= $post[
+                                "id"
+                            ] ?>" class="btn btn-2 btn-lg">Leer más</a>
                         </div>
                     </div>
                 </div>
