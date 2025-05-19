@@ -117,12 +117,12 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                     <div class="card blog-post">
                         <div class="card-body">
                             <div class="post-meta mb-2">
-                            <?php
-                            $fecha = $postData['fecha_publicacion'];
-                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
-                            #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
-                            $date = new DateTime($fecha);
-                            ?>
+                                <?php
+                                $fecha = $postData['fecha_publicacion'];
+                                setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                                #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                                $date = new DateTime($fecha);
+                                ?>
                                 <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
                                 <span class="ms-3"><i class="bi bi-clock"></i> <?= $postData['tiempo_lectura'] ?> min de lectura</span>
                             </div>
@@ -134,7 +134,7 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                                 preg_match('/<p>(.*?)<\/p>/s', $html, $matches)// Obtiene el primer párrafo completo con etiqueta <p>
                             ?>
 
-                            <p class="card-text"><?= $matches[0] ?></p>
+                            <p class="card-text"><?= $matches[1] ?></p>
                             <br>
                             <?php if (!empty($postData['portada'])): ?>
                             <img src="<?= htmlspecialchars($postData['portada']) ?>" class="img-fluid rounded mb-4 card-img-top" alt="Portada" title="Portada">
@@ -174,7 +174,7 @@ $postDestacado = $db->query("SELECT * FROM posts where id = (SELECT MAX(id) FROM
                                 preg_match('/<p>(.*?)<\/p>/s', $html, $matches)// Obtiene el primer párrafo completo con etiqueta <p>
                             ?>
 
-                            <p class="card-text"><?= $matches[0] ?></p>
+                            <p class="card-text"><?= $matches[1] ?></p>
                             
                             <br>
                             <?php if (!empty($post['portada'])): ?>
