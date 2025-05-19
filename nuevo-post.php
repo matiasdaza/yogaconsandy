@@ -1,5 +1,5 @@
-<?php 
-include 'includes/db.php';
+<?php
+include "includes/db.php";
 $etiquetas = $db->query("SELECT * FROM etiquetas");
 ?>
 
@@ -81,7 +81,9 @@ $etiquetas = $db->query("SELECT * FROM etiquetas");
             <select multiple class="form-select" disabled value="No editable" id="etiquetas" name="etiquetas[]">
 
             <?php foreach ($etiquetas as $etiqueta): ?>
-                <option value=<?= $etiqueta['id'] ?>><?= $etiqueta['nombre'] ?></option>
+                <option value=<?= $etiqueta["id"] ?>><?= $etiqueta[
+    "nombre"
+] ?></option>
                 
                 <?php endforeach; ?>
             </select>

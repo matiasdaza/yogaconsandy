@@ -1,15 +1,14 @@
 <?php
-include '../includes/db.php';
-$id = $_GET['id'];
+include "../includes/db.php";
+$id = $_GET["id"];
 $stmt = $db->prepare("SELECT * FROM posts WHERE id = ?");
 $stmt->execute([$id]);
 $post = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$post) {
     header("Location: ../blog.php"); // si no hay resultados
-    exit;
+    exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,7 +34,7 @@ if (!$post) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Lee este artículo">
-    <title><?= htmlspecialchars($post['titulo']) ?></title>
+    <title><?= htmlspecialchars($post["titulo"]) ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Personal CSS -->
@@ -45,13 +44,19 @@ if (!$post) {
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Metadata para previsualización -->
-    <meta property="og:title" content="<?= htmlspecialchars($post['titulo']) ?>" />
+    <meta property="og:title" content="<?= htmlspecialchars(
+        $post["titulo"]
+    ) ?>" />
     <meta property="og:description" content="Lee este artículo" />
-    <meta property="og:image" content="../<?= htmlspecialchars($post['portada']) ?>" />
+    <meta property="og:image" content="../<?= htmlspecialchars(
+        $post["portada"]
+    ) ?>" />
     <meta property="og:url" content="https://www.yogaconsandy.cl" />
     <meta property="og:type" content="article" />
     <meta property="article:author" content="https://www.yogaconsandy.cl/index.html#sec-1" />
-    <meta property="article:published_time" content="<?= $post['fecha_publicacion'] ?>" />
+    <meta property="article:published_time" content="<?= $post[
+        "fecha_publicacion"
+    ] ?>" />
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -112,26 +117,41 @@ if (!$post) {
                             <header class="mb-4">
                                 <div class="post-meta mb-3">
                                 <?php
-                                $fecha = $post['fecha_publicacion'];
-                                setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
+                                $fecha = $post["fecha_publicacion"];
+                                setlocale(
+                                    LC_TIME,
+                                    "es_ES.UTF-8",
+                                    "es_ES",
+                                    "Spanish_Spain",
+                                    "es"
+                                );
                                 #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
                                 $date = new DateTime($fecha);
                                 ?>
-                                    <span><i class="bi bi-calendar"></i> <?= strftime("%e de %B, %Y", $date->getTimestamp()) ?></span>
-                                    <span class="ms-3"><i class="bi bi-clock"></i> <?= $post['tiempo_lectura'] ?> min de lectura</span>
+                                    <span><i class="bi bi-calendar"></i> <?= strftime(
+                                        "%e de %B, %Y",
+                                        $date->getTimestamp()
+                                    ) ?></span>
+                                    <span class="ms-3"><i class="bi bi-clock"></i> <?= $post[
+                                        "tiempo_lectura"
+                                    ] ?> min de lectura</span>
                                 </div>
-                                <h1 class="mb-4"><?= htmlspecialchars($post['titulo']) ?></h1>
+                                <h1 class="mb-4"><?= htmlspecialchars(
+                                    $post["titulo"]
+                                ) ?></h1>
                                 <div class="post-tags mb-4">
                                     <span class="tag">Yoga</span>
                                 </div>
-                                <?php if (!empty($post['portada'])): ?>
-                                <img src="../<?= htmlspecialchars($post['portada']) ?>" class=" img-fluid rounded mb-4" alt="Portada" title="Portada">
+                                <?php if (!empty($post["portada"])): ?>
+                                <img src="../<?= htmlspecialchars(
+                                    $post["portada"]
+                                ) ?>" class=" img-fluid rounded mb-4" alt="Portada" title="Portada">
                                 <?php endif; ?>
                             </header>
 
                             <div class="post-content">
                                 <article>                        
-                                    <p><?= $post['html'] ?></p>
+                                    <p><?= $post["html"] ?></p>
                                   </article>
                                                             
                             </div>
@@ -144,14 +164,18 @@ if (!$post) {
                 <div class="col-lg-8">
 
                     <?php
-                    $stmt = $db->prepare("SELECT autor, contenido, fecha FROM comentarios WHERE post_id = ? ORDER BY fecha DESC");
-                    $stmt->execute([$post['id']]);
+                    $stmt = $db->prepare(
+                        "SELECT autor, contenido, fecha FROM comentarios WHERE post_id = ? ORDER BY fecha DESC"
+                    );
+                    $stmt->execute([$post["id"]]);
                     $comentarios = $stmt->fetchAll();
                     ?>
 
                     <h4>Únete a la conversación:</h4>
                     <form action="procesar_comentario.php" method="POST">
-                        <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                        <input type="hidden" name="post_id" value="<?= $post[
+                            "id"
+                        ] ?>">
                         <div class="mb-2">
                             <input type="text" name="autor" class="form-control" placeholder="Tu nombre" required>
                         </div>
@@ -166,13 +190,24 @@ if (!$post) {
                     <?php foreach ($comentarios as $c): ?>
                     <div class="mb-3 border p-2 rounded comentarios">
                         <?php
-                            $fechaComentario = $c['fecha'];
-                            setlocale(LC_TIME, 'es_ES.UTF-8', 'es_ES', 'Spanish_Spain', 'es');
-                            #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
-                            $date = new DateTime($fechaComentario);
+                        $fechaComentario = $c["fecha"];
+                        setlocale(
+                            LC_TIME,
+                            "es_ES.UTF-8",
+                            "es_ES",
+                            "Spanish_Spain",
+                            "es"
+                        );
+                        #setlocale(LC_TIME, 'es_ES.UTF-8'); // Para entornos Linux con soporte en español
+                        $date = new DateTime($fechaComentario);
                         ?>
-                        <strong><?= htmlspecialchars($c['autor']) ?></strong> <em><?= strftime("%e de %B, %Y - %H:%M", $date->getTimestamp()) ?></em>
-                        <p><?= nl2br(htmlspecialchars($c['contenido'])) ?></p>
+                        <strong><?= htmlspecialchars(
+                            $c["autor"]
+                        ) ?></strong> <em><?= strftime(
+    "%e de %B, %Y - %H:%M",
+    $date->getTimestamp()
+) ?></em>
+                        <p><?= nl2br(htmlspecialchars($c["contenido"])) ?></p>
                     </div>
                     <?php endforeach; ?>
                     
